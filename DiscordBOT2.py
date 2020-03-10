@@ -262,6 +262,17 @@ async def on_message(message):
         elems = soup.find_all("span")
         print(elems)
 
+#最新の情報を取得できない、整地鯖ランキング表示コード
+"""
+最新の情報をとるには、ライン31あたりのクロームドライバー起動(クローム起動)をすることで最新の情報に切り替わります
+つまり、今の所のコードでは、BOTが起動したら情報更新、となっています
+よろしく4を実行した時に、更新する、という方法はとても不安定なので不可能でした。だから、
+ループさせて、10分毎にクロームを再起動して、新しい情報を変数に突っ込むように作りたかったんだけど
+ループ関数の中で変数を定義して、それを他の関数(on_message(ここではよろしく4コマンド))で使うには、グローバル変数の宣言が必要
+それでループ処理の中でグローバル宣言をしたんだけど
+結局、他関数では使えなかった。
+そこで私のもがきは終了した。
+"""
     if message.content=="よろしく4":
         
         driver.get("https://w4.minecraftserver.jp/#page=1&type=break&duration=daily")
@@ -342,7 +353,7 @@ async def on_message(message):
             await mcs(embed = em_bot)
          
 
-    
+#現状、ほぼ必ず失敗する、毎日の最後に最新のランキング情報を取得して表示するコード
 @tasks.loop()
 async def loop():
     await asyncio.sleep(60)
@@ -491,4 +502,4 @@ async def on_raw_reaction_add(reaction):
             
 
 
-client.run("Njc3NDI0ODkyNTk3MTA4NzQ3.XkUDlw.wLqznaUXe9CF6H0nIbLZfReihx0")
+client.run("クライアントね")
